@@ -1,0 +1,217 @@
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>PetSitter</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+        <link rel="stylesheet" href="static/styles.css"> 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img src="static/logo.png" alt="PetSitter Logo" class="logo" width="50" height="50">
+                </a>
+                <div class="nav-buttons">
+                    <button class="btn nav-btn" id="inicio">Inicio</button>
+                    <button class="btn nav-btn" id="turnos">Turnos</button>
+                    <button class="btn nav-btn" id="nosotros">Nosotros</button>
+                    <button class="btn nav-btn" id="contacto">Contactanos</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Contenedor principal. Cada vista sera cargada por JS segun el boton clickeado -->
+        <div class="container">
+
+            <!-- Vista Contactanos  -->
+            <div id="inicio-view" class="view-container">
+                <h2 class="mb-4">¡Bienvenido a PetSitter!</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="static/slideshow/1.jpeg" alt="Nuestros Clientes" class="img-fluid rounded">
+                    </div>
+                    <div class="col-md-6 ">
+                        <div class="about-card">
+                            <h3>Tu Mascota en las Mejores Manos</h3>
+                            <p>Saldras de casa y no sabes que hacer por tu peludito? Nosotros nos encargamos! Ofrecemos un servicio integral de cuidado de mascotas a domicilio, ocupandonos de todo lo que tu peloduto necesita para estar feliz y que vos estes tranquilo.</p>
+                            <p>Ofrecemos:</p>
+                            <ul>
+                                <li>Paseos personalizados</li>
+                                <li>Cuidado a domicilio</li>
+                                <li>Acompañamiento al veterinario</li>
+                                <li>Administracion de medicamentos</li>
+                                <li>Entrenamiento basico</li>
+                                <li>Actualizaciones y fotos</li>
+                                <li>Asesoria y tips para dueños</li>
+                            </ul>
+                            <p>Te interesa? <a href="#contacto" class="nav-link">¡Contáctanos!</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vista Nosotros  -->
+            <div id="nosotros-view" class="view-container" style="display: none;">
+                <h2 class="mb-4">¿Quienes Somos?</h2>
+                
+                <div class="row mb-5 justify-content-center">
+                    <div class="col-md-4 text-center">
+                        <div class="founder-card">
+                            <img src="static/founder1.jpg" alt="Founder 1" class="founder-image rounded-circle">
+                            <h4 class="founder-name">Pepito Perez</h4>
+                            <p class="founder-role">Co-Fundador y Director Regional Parana </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div class="founder-card">
+                            <img src="static/founder2.jpg" alt="Founder 2" class="founder-image rounded-circle">
+                            <h4 class="founder-name">Maria Martinez</h4>
+                            <p class="founder-role">Co-Fundadora y Director Regional CABA </p>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="row equal-height-row d-flex flex-wrap">
+                    <div class="col-md-4 d-flex flex-column justify-content-between">
+                        <div class="about-card">
+                            <h4>Nuestra Historia</h4>
+                            <p>PetSitter nació en 2020 en Paraná y Santa Fe, impulsado por nuestra pasión por los animales. Al notar la falta de servicios confiables para el cuidado de mascotas, decidimos crear PetSitter, ofreciendo atención personalizada y de calidad. Hoy, también estamos en Buenos Aires, llevando nuestro compromiso a más familias.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 d-flex flex-column justify-content-between">
+                        <div class="about-card">
+                            <h4>Nuestra Misión</h4>
+                            <p>En PetSitter, nuestra misión es cuidar de las mascotas de nuestros clientes como si fueran propias. Nos comprometemos a brindar atención amorosa y personalizada, asegurando que cada peludito se sienta seguro y feliz, mientras su dueño está ausente.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 d-flex flex-column justify-content-between">
+                        <div class="about-card">
+                            <h4>Nuestro Equipo</h4>
+                            <p>Contamos con paseadores certificados y amantes de los animales, capacitados para brindar el mejor servicio.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+             <!-- Vista Turnos  -->
+             <div id="turnos-view" class="view-container" style="display: none;">
+                <h2 class="mb-4">Agenda Tu Turno!</h2>
+                <div class="row ">
+                    <div class="col-md-6">
+                        <div class="calendar-container">
+                            <form id="booking-form">
+                                <div class="form-group">
+                                    <label for="pet-name">Nombre de tu mascota</label>
+                                    <input type="text" class="form-control" id="pet-name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="service-type">Tipo de servicio</label>
+                                    <select class="form-control" id="service-type" required>
+                                        <option value="walk">Paseo</option>
+                                        <option value="sitting">Cuidado en casa</option>
+                                        <option value="training">Entrenamiento</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="date">Fecha y hora</label>
+                                    <input type="text" class="form-control" id="date" required>
+                                </div>
+                                <button type="submit" class="btn nav-btn">Reservar Turno</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="booking-info">
+                            <h4>Horarios Disponibles</h4>
+                            <p>Nuestros servicios están disponibles:</p>
+                            <ul>
+                                <li>Lunes a Viernes: 8:00 - 20:00</li>
+                                <li>Sábados: 9:00 - 18:00</li>
+                                <li>Domingos: 10:00 - 16:00</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Google Map  -->
+                <div class="col-md-6">
+                    <h4>Área de Cobertura</h4>
+                    <div class="map-container" style="width: 100%; height: 300px; border-radius: var(--border-radius); overflow: hidden; box-shadow: var(--shadow-sm);">
+                        <iframe
+                            src="https://www.google.com/maps/d/u/0/embed?mid=1xVrwGENpUjkN32J1FBveO9VEvGMhSIE&ehbc=2E312F&noprof=1"
+                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+                        </iframe>
+                     </div>
+                </div>
+            </div>
+
+            <!-- Vista Contactanos  -->
+            <div id="contacto-view" class="view-container" style="display: none;">
+                <h2 class="mb-4">Contactanos</h2>
+                <div class="contact-form">
+                    <form action="https://formspree.io/f/manyooqa" method="POST">
+                        <div class="form-group">
+                            <label for="nombre">Nombre*</label>
+                            <input type="text" class="form-control" id="nombre" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email*</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono">Teléfono</label>
+                            <input type="tel" class="form-control" id="telefono" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="mensaje">Mensaje*</label>
+                            <textarea class="form-control" id="mensaje" name="message" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn nav-btn">Enviar Mensaje</button>
+                    </form>
+                </div>
+                <div class="contact-methods mt-4">
+                    <h5>O a través de:</h5>
+                    <div class="social-icons">
+                        <a href="https://wa.me/5491150500147" target="_blank" class="social-link" id="whatsapp">
+                            <i class="fab fa-whatsapp fa-2x"></i>
+                        </a>
+                        <a href="https://t.me/GCBA" target="_blank" class="social-link" id="telegram">
+                            <i class="fab fa-telegram fa-2x"></i>
+                        </a>
+                        <a href="https://m.me/GCBA" target="_blank" class="social-link" id="messenger">
+                            <i class="fab fa-facebook-messenger fa-2x"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+           
+        </div>
+
+        <!-- Scripts -->
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <script src="./static/petsitter.js"></script>
+    </body>
+
+    <footer class="footer-container">
+        <div>
+            <div class="mb-2">
+                <h5>Contact Us</h5>
+                <p>Email: info@petsitter.com.ar | Phone: +12-3456-7890</p>
+            </div>
+            <div class="social-icons mb-2">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/pet.sitter.ba/"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p>&copy; 2024 PetSitter. All rights reserved.</p>
+        </div>
+    </footer>
+    
+</html>
