@@ -1,0 +1,38 @@
+[
+    {
+      "reviewer": "Juan Sebastian",
+      "pet": "Tokyo",
+      "rating": 5,
+      "review": "El equipo vino a casa para cuidar de Tokyo mientras yo estaba de viaje. Recibí actualizaciones constantes con fotos y notas sobre cómo estaba. Tokyo parecía feliz y cómodo todo el tiempo. ¡Servicio excepcional!",
+      "image_url": "/static/images/review1.jpg"
+    },
+    {
+      "reviewer": "Maria Luisa",
+      "pet": "Luna",
+      "rating": 4.9,
+      "review": "Estaba preocupada por dejar a Luna sola, pero los cuidadores hicieron un trabajo maravilloso. Pasaban tiempo con ella, le daban sus paseos y me aseguraban que estaba bien atendida. Luna estaba relajada y feliz cuando regresé.",
+      "image_url": "/static/images/review2.jpg"
+    },
+    {
+      "reviewer": "Carlos Herrera",
+      "pet": "Max",
+      "rating": 5,
+      "review": "Mientras estaba en el trabajo, los cuidadores visitaban a Max todos los días. Jugaban con él, le daban su comida y hasta limpiaban su área de descanso. Es un alivio saber que Max recibe tanto amor y atención.",
+      "image_url": "/static/images/review3.jpg"
+    },
+    {
+      "reviewer": "Lucía Fernández",
+      "pet": "Bella",
+      "rating": 4.8,
+      "review": "Fue un gran alivio encontrar un servicio que cuidara a Bella en casa. Los cuidadores fueron muy amables y profesionales. Me encantó recibir fotos de Bella disfrutando de su día mientras yo trabajaba.",
+      "image_url": "/static/images/review4.jpg"
+    },
+    {
+      "reviewer": "Andrés López",
+      "pet": "Rocky",
+      "rating": 5,
+      "review": "El servicio fue impecable. Vinieron a casa para pasear y alimentar a Rocky mientras yo estaba ocupado. Cuando regresé, parecía relajado y enérgico, ¡como si hubiera estado en un mini spa para mascotas!",
+      "image_url": "/static/images/review5.jpg"
+    }
+  ]
+  

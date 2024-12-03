@@ -3,22 +3,26 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>PetSitter</title>
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-        <link rel="stylesheet" href="static/styles.css"> 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
+        <link rel="stylesheet" href="static/styles.css"> 
     </head>
     <body>
         <nav class="navbar navbar-expand-lg">
             <div class="container">
                 <a class="navbar-brand" href="#">
-                    <img src="static/logo.png" alt="PetSitter Logo" class="logo" width="50" height="50">
+                    <img src="static/images/logo.png" alt="PetSitter Logo" class="logo" width="50" height="50">
                 </a>
                 <div class="nav-buttons">
                     <button class="btn nav-btn" id="inicio">Inicio</button>
                     <button class="btn nav-btn" id="turnos">Turnos</button>
                     <button class="btn nav-btn" id="nosotros">Nosotros</button>
+                    <button class="btn nav-btn" id="resenas">Reseñas</button>
                     <button class="btn nav-btn" id="contacto">Contactanos</button>
                 </div>
             </div>
@@ -61,14 +65,14 @@
                 <div class="row mb-5 justify-content-center">
                     <div class="col-md-4 text-center">
                         <div class="founder-card">
-                            <img src="static/founder1.jpg" alt="Founder 1" class="founder-image rounded-circle">
+                            <img src="static/images/founder1.jpg" alt="Founder 1" class="founder-image rounded-circle">
                             <h4 class="founder-name">Pepito Perez</h4>
                             <p class="founder-role">Co-Fundador y Director Regional Parana </p>
                         </div>
                     </div>
                     <div class="col-md-4 text-center">
                         <div class="founder-card">
-                            <img src="static/founder2.jpg" alt="Founder 2" class="founder-image rounded-circle">
+                            <img src="static/images/founder2.jpg" alt="Founder 2" class="founder-image rounded-circle">
                             <h4 class="founder-name">Maria Martinez</h4>
                             <p class="founder-role">Co-Fundadora y Director Regional CABA </p>
                         </div>
@@ -185,6 +189,14 @@
                             <i class="fab fa-facebook-messenger fa-2x"></i>
                         </a>
                     </div>
+                </div>
+            </div>
+            
+            <!-- Vista Reseñas -->
+            <div id="resenas-view" class="view-container" style="display: none;">
+                <h2 class="mb-4">Lo que dicen nuestros clientes!</h2>
+                <div class="row equal-height-row d-flex flex-wrap justify-content-center" id="reviews-container">
+                    <!-- Reseñas cargaran acá -->
                 </div>
             </div>
 
