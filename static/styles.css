@@ -294,4 +294,11 @@ li::before {
   color: var(--terciary-color);
 }
 
-.fas.fa-star, .fas.fa-star-half-alt, .far.fa-star { color: var(--highlight-color);}
+.fas.fa-star, .fas.fa-star-half-alt, .far.fa-star { color: var(--highlight-color); font-size: 1.5rem;}
+
+.paw-icon-before,
+.paw-icon-after {
+  color: var(--highlight-color);
+  margin: 0 0.5rem;
+  font-size: 0.8em; /* Adjust size as needed */
+}

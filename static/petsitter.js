@@ -77,7 +77,6 @@ function navigateTo(view) {
     window.location.hash = view === 'inicio' ? '' : view;
 }
 
-// Cargar y mostrar reseñas a partir de reviews.json
 function displayReviews() {
     fetch('static/reviews.json')
         .then(response => response.json())
@@ -111,28 +110,32 @@ function displayReviews() {
                     return starsHTML;
                 };
 
+                // Remover slash inicial de la URL para evitar problemas con Github pages
+                const fixedImageUrl = review.image_url.startsWith('/') ? review.image_url.slice(1) : review.image_url;
+
                 const reviewCard = document.createElement("div");
                 reviewCard.classList.add("col-md-4", "mb-4");
 
                 reviewCard.innerHTML = `
                     <div class="resena-card">
-                        <img src="${review.image_url}" class="card-img-top rounded-circle" alt="Review by ${review.reviewer}">
+                        <div class="stars mb-2">
+                            ${generateStarRating(review.rating)}
+                        </div>
+                        <img src="${fixedImageUrl}" class="card-img-top rounded-circle" alt="Review by ${review.reviewer}">
                         <div class="card-body text-center">
-                            <h5 class="card-title">${review.pet}</h5>
-                            <div class="stars mb-2">
-                                ${generateStarRating(review.rating)}
-                            </div>
+                            <h3 class="card-title">${review.reviewer}</h3>
+                            <h5 class="card-title">
+                                <i class="fas fa-paw paw-icon-before"></i>
+                                ${review.pet}
+                                <i class="fas fa-paw paw-icon-after"></i>
+                            </h5>
                             <p class="card-text">${review.review}</p>
                         </div>
                     </div>
                 `;
                 reviewsContainer.appendChild(reviewCard);
             });
-        })
-        .catch(error => {
-            console.error('Error loading reviews:', error);
-            const reviewsContainer = document.getElementById("reviews-container");
-            reviewsContainer.innerHTML = '<p>Error loading reviews. Please try again later.</p>';
         });
 }
+
 
