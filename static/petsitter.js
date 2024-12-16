@@ -43,10 +43,10 @@ document.addEventListener('DOMContentLoaded', function() {
             const serviceType = card.dataset.service;
             const serviceTypeInput = document.getElementById('service-type');
             
-            // Update the hidden input with the selected service types
+            // Actualizar a medida que se selecciona
             const selectedServices = Array.from(document.querySelectorAll('.service-card.selected'))
                 .map(card => card.dataset.service);
-            serviceTypeInput.value = selectedServices.join(', '); // Store the selected services
+            serviceTypeInput.value = selectedServices.join(', '); 
         });
     });
 
@@ -75,9 +75,6 @@ document.addEventListener('DOMContentLoaded', function() {
             selectedDate: selectedDate,
             selectedServices: selectedServices
         };
-        //logear para debug
-        console.log("Guardando reserva:")
-        console.log(reservation)
 
         // Fetchear reservaciones existentes y añadir nueva antes de guardar
         const existingReservations = JSON.parse(localStorage.getItem('reservations')) || [];
@@ -97,8 +94,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Resetear el formulario y deseleccionar los servicios
         this.reset();
-        serviceCards.forEach(c => c.classList.remove('selected')); // Fix to clear selected services
-        serviceTypeInput.value = ''; // Ensure the input value resets
+        serviceCards.forEach(c => c.classList.remove('selected')); // Limpiar servicios seleccionados
+        serviceTypeInput.value = ''; 
 
         // Mostrar mensaje de reservas previas
         showPreviousReservationsMessage();
@@ -135,26 +132,25 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+//Mostrar mensaje si hay reservas previas, ocultarlo de no haber
 function showPreviousReservationsMessage() {
     const previousReservationsMessage = document.getElementById('previous-reservations');
     const previousReservations = JSON.parse(localStorage.getItem('reservations')) || [];
 
-    console.log('Existing Reservations:', previousReservations);  // Debugging
-
     if (previousReservations.length > 0) {
-        previousReservationsMessage.style.display = 'inline'; // Show the message
+        previousReservationsMessage.style.display = 'inline'; 
     } else {
-        previousReservationsMessage.style.display = 'none'; // Hide if no reservations
+        previousReservationsMessage.style.display = 'none'; 
     }
 }
 
-// Handle the "Tienes reservas previas" click event
+// Accion al dar click en "ver reseras previas"
 document.getElementById('previous-reservations').addEventListener('click', function() {
     const previousReservations = JSON.parse(localStorage.getItem('reservations')) || [];
     displayReservationPopup(previousReservations);
 });
 
-// Function to display the popup with reservation details
+// Mostrar detalles de reservas previas
 function displayReservationPopup(reservations) {
     let popupContent = '<h3>Reservas previas</h3><ul>';
 
@@ -172,7 +168,7 @@ function displayReservationPopup(reservations) {
 
     popupContent += '</ul>';
 
-    // Create the modal
+    // Crear el modal para las reservas
     const modal = document.createElement('div');
     modal.classList.add('modal');
     modal.innerHTML = `
@@ -182,50 +178,50 @@ function displayReservationPopup(reservations) {
         </div>
     `;
 
-    // Append modal to the body
+    // Append el modal al body
     document.body.appendChild(modal);
 
-    // Add event listener to close the modal
+    // Cerrar el modal
     modal.querySelector('.close-btn').addEventListener('click', function () {
         modal.remove();
     });
 
-    // Add event listeners to delete buttons
+    // Event listeners para eliminar reservaciones
     modal.querySelectorAll('.delete-reservation-btn').forEach(button => {
         button.addEventListener('click', function () {
-            const index = this.closest('li').dataset.index; // Get the index from the list item
+            const index = this.closest('li').dataset.index; 
             deleteReservation(index, modal);
         });
     });
 
-    // Display the modal
+    // Mostrar el modal
     modal.style.display = 'Flex';
 }
 
-// Function to delete a reservation
+// Funcion para eliminar reservaciones
 function deleteReservation(index, modal) {
-    // Fetch reservations from localStorage
+    // Fetch reservaciones del localstorage
     const reservations = JSON.parse(localStorage.getItem('reservations')) || [];
     
-    // Remove the selected reservation
+    // Quitar la seleccion
     reservations.splice(index, 1);
 
-    // Update localStorage
+    // Actualizar el  localStorage
     localStorage.setItem('reservations', JSON.stringify(reservations));
 
-    // Refresh the modal content or close it if no reservations remain
+    // Actualizar el contenido del modal o cerrar si no hay reservas restantes
     if (reservations.length > 0) {
-        modal.remove(); // Remove the current modal
-        displayReservationPopup(reservations); // Reload with updated reservations
+        modal.remove(); 
+        displayReservationPopup(reservations); 
     } else {
-        modal.remove(); // Close the modal
-        showPreviousReservationsMessage(); // Update the "Previous Reservations" message visibility
+        modal.remove(); 
+        showPreviousReservationsMessage(); 
     }
 }
 
 
 
-// Check for previous reservations on page load and show the message if needed
+// Mostrar mensajes de reservaciones previas si las hay
 window.addEventListener('load', function() {
     showPreviousReservationsMessage();
 });

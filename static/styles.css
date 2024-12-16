@@ -197,21 +197,19 @@ li::before {
 }
 
 .resena-card img {
-  width: 150px; /* Adjusted size for a larger image */
+  width: 150px; 
   height: 150px;
   object-fit: cover;
   border-radius: 50%;
   margin: 0 auto;
-  border: 4px solid var(--primary-color); /* Border like the founder card */
+  border: 4px solid var(--primary-color); 
 }
 
-/* Ensuring similar padding and hover effects as the founder card */
 .resena-card .card-title,
 .resena-card .card-text {
   padding: 0 1rem;
 }
 
-/* Ensuring equal heights for "Reseñas" cards */
 #resenas-view .equal-height-row {
   display: flex;
   flex-wrap: wrap;
@@ -226,7 +224,6 @@ li::before {
   flex: 1;
 }
 
-
 /* Media Query para diseño responsivo en moviles */
 @media (max-width: 768px) {
   .service-cards {
@@ -236,8 +233,25 @@ li::before {
   .service-card {
       margin-bottom: 1rem;
   }
+
   .navbar {
+    display: flex;  
+    flex-direction: column; 
     padding: 0.5rem;
+    width: 100%;  
+    box-sizing: border-box;  /
+  }
+
+  .navbar-nav {
+    display: flex;
+    flex-direction: column;  
+    padding-left: 0;  
+    margin: 0;  
+  }
+
+  .navbar-nav .nav-item {
+    width: 100%;  
+    text-align: center;  
   }
 
   .nav-buttons {
@@ -253,8 +267,11 @@ li::before {
   .view-container {
     padding: 1rem;
     margin-top: 1rem;
+    width: 100%;
+    box-sizing: border-box; 
   }
 }
+
 
 /* Estilos del footer */
 .footer-container {
@@ -307,22 +324,22 @@ li::before {
 .paw-icon-after {
   color: var(--highlight-color);
   margin: 0 0.5rem;
-  font-size: 0.8em; /* Adjust size as needed */
+  font-size: 0.8em; 
 }
 
 /* Estilos para las tarjetas de servicio */
 .service-card {
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Space out content evenly */
-  align-items: center; /* Center content horizontally */
+  justify-content: space-between; 
+  align-items: center; 
   cursor: pointer;
   padding: 15px;
   border: 3px solid var(--terciary-color);
   transition: background-color 0.3s ease;
   margin-bottom: 20px;
-  height: 230px; /* Adjust this height as needed */
-  text-align: center; /* Ensure text is centered */
+  height: 230px; 
+  text-align: center; 
   position: relative;
 }
 
@@ -340,7 +357,7 @@ li::before {
 .service-card .fa-check {
   font-size: 2rem;
   color: var(--highlight-color);
-  margin-top: 10px; /* Adjust the space between title and checkmark */
+  margin-top: 10px; 
 }
 
 .service-card .card-text {
@@ -350,62 +367,60 @@ li::before {
   margin-bottom: 0;
 }
 
-/* Style for selected cards */
+/* Estilo para cards de servicios seleccionados */
 .service-card.selected {
-  background-color: var(--secondary-color); /* Light green background for selected cards */
-  border-color: var(--highlight-color); /* Green border for selected card */
+  background-color: var(--secondary-color); 
+  border-color: var(--highlight-color); 
 }
 
-/* Hide the checkmark by default */
+/* Ocultar checkmark por default y mostrar cuando este seleccionada la tarjeta */
 .service-card .fa-check {
   display: none;
 }
-
-/* Display the checkmark when selected */
 .service-card.selected .fa-check {
-  display: block; /* Show checkmark only when selected */
+  display: block;
 }
 
+/* Customizar alerta de reserva */
 .custom-alert {
-  background-color: #C7A9C1; /* Custom background color */
-  color: white; /* Text color */
-  font-size: 16px; /* Font size */
-  border-radius: 10px; /* Rounded corners */
-  padding: 20px; /* Add some padding */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add some shadow */
-}
-
+  background-color: var(--secondary-color); 
+  color: var(--terciary-color);
+  font-size: 16px; 
+  border-radius: 10px; 
+  padding: 20px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+} 
 .custom-alert strong {
-  font-size: 18px; /* Make the strong text larger */
+  font-size: 18px; 
 }
 
 
-/* Modal overlay */
+/* Modal overlay para las reservas existentes*/
 .modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5); /* Transparent background */
+  background-color: rgba(0, 0, 0, 0.5); 
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
 }
 
-/* Modal content */
+/* Contenido del Modal */
 .modal-content {
-  background-color: #fff;
+  background-color: var(--terciary-color);
   padding: 20px;
   width: 90%;
-  max-width: 500px; /* Limit size */
+  max-width: 500px; 
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   position: relative;
 }
 
-/* Close button */
+/* Boton de cerrar en el modal */
 .close-btn {
   position: absolute;
   top: 10px;
