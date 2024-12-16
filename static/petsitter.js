@@ -15,13 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
         heroImage.src = images[currentImage];
     }, 3000);
 
-    // Inicializacion de flatpickr 
-    flatpickr("#date", {
-        enableTime: true,
-        dateFormat: "Y-m-d H:i",
-        minDate: "today",
-        maxDate: new Date().fp_incr(30)
-    });
+    
 
     // Event listener de los botones
     document.querySelector('#inicio').addEventListener('click', () => navigateTo('inicio'));
@@ -30,12 +24,101 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('#contacto').addEventListener('click', () => navigateTo('contacto'));
     document.querySelector('#resenas').addEventListener('click', () => navigateTo('resenas'));
 
-    document.querySelector('#booking-form')?.addEventListener('submit', function(e) {
-        e.preventDefault();
-        alert('Turno reservado! Te enviaremos la confirmación por email.');
-        this.reset();
+    // Formulario de reserva
+    // Inizializar flatpickr
+    flatpickr("#date", {
+        enableTime: true,
+        dateFormat: "Y-m-d H:i",
+        minDate: "today",
+        maxDate: new Date().fp_incr(60)
     });
 
+    // Seleccion de tarjetas de servicios
+    const serviceCards = document.querySelectorAll('.service-card');
+    const serviceTypeInput = document.getElementById('service-type');
+
+    serviceCards.forEach(card => {
+        card.addEventListener('click', function() {
+            card.classList.toggle('selected');
+            const serviceType = card.dataset.service;
+            const serviceTypeInput = document.getElementById('service-type');
+            
+            // Update the hidden input with the selected service types
+            const selectedServices = Array.from(document.querySelectorAll('.service-card.selected'))
+                .map(card => card.dataset.service);
+            serviceTypeInput.value = selectedServices.join(', '); // Store the selected services
+        });
+    });
+
+   // Manejar el envio del formulario de reserva
+   document.querySelector('#booking-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const petName = document.getElementById('pet-name').value.trim();
+        const selectedDate = document.getElementById('date').value.trim();
+        const selectedServices = serviceTypeInput.value;
+
+        // Validacion del formulario
+        if (!selectedServices) {
+            alert('Por favor, selecciona al menos un servicio.');
+            return;
+        }
+
+        if (!selectedDate) {
+            alert('Por favor, selecciona una fecha y hora.');
+            return;
+        }
+
+        // Crear el objeto de la reservacion a guardar
+        const reservation = {
+            petName: petName,
+            selectedDate: selectedDate,
+            selectedServices: selectedServices
+        };
+        //logear para debug
+        console.log("Guardando reserva:")
+        console.log(reservation)
+
+        // Fetchear reservaciones existentes y añadir nueva antes de guardar
+        const existingReservations = JSON.parse(localStorage.getItem('reservations')) || [];
+        existingReservations.push(reservation);
+        localStorage.setItem('reservations', JSON.stringify(existingReservations));
+
+        // Mostrar mensaje de confirmacion de reserva
+        const confirmationMessage = document.getElementById('confirmation-message');
+        confirmationMessage.innerHTML = `
+            <div class="alert custom-alert">
+                <strong>¡Reserva confirmada!</strong><br>
+                Mascota: <strong>${petName}</strong><br>
+                Servicios: <strong>${selectedServices}</strong><br>
+                Fecha y hora: <strong>${selectedDate}</strong>
+            </div>
+        `;
+
+        // Resetear el formulario y deseleccionar los servicios
+        this.reset();
+        serviceCards.forEach(c => c.classList.remove('selected')); // Fix to clear selected services
+        serviceTypeInput.value = ''; // Ensure the input value resets
+
+        // Mostrar mensaje de reservas previas
+        showPreviousReservationsMessage();
+    });
+
+
+    window.addEventListener('load', function() {
+        // Fetchear todas las reservas al cargar la pagina
+        const existingReservations = JSON.parse(localStorage.getItem('reservations')) || [];
+    
+        // Mostrar en consola para debug
+        if (existingReservations.length > 0) {
+            console.log('Existing Reservations:', existingReservations);
+        } else {
+            console.log('No existing reservations found.');
+        }
+    });
+    
+
+ 
     // Cambios en URLs al navegar y cargar seccion correspondiente
     window.addEventListener('hashchange', function() {
         const view = window.location.hash.replace('#', '') || 'inicio';
@@ -46,10 +129,105 @@ document.addEventListener('DOMContentLoaded', function() {
     const initialView = window.location.hash.replace('#', '') || 'inicio';
     loadView(initialView);
 
-    // Display reviews when navigating to "reseñas"
+    // Mostrar reseñas al ir a la seccion de reseñas
     if (window.location.hash.includes('resenas')) {
         displayReviews();
     }
+});
+
+function showPreviousReservationsMessage() {
+    const previousReservationsMessage = document.getElementById('previous-reservations');
+    const previousReservations = JSON.parse(localStorage.getItem('reservations')) || [];
+
+    console.log('Existing Reservations:', previousReservations);  // Debugging
+
+    if (previousReservations.length > 0) {
+        previousReservationsMessage.style.display = 'inline'; // Show the message
+    } else {
+        previousReservationsMessage.style.display = 'none'; // Hide if no reservations
+    }
+}
+
+// Handle the "Tienes reservas previas" click event
+document.getElementById('previous-reservations').addEventListener('click', function() {
+    const previousReservations = JSON.parse(localStorage.getItem('reservations')) || [];
+    displayReservationPopup(previousReservations);
+});
+
+// Function to display the popup with reservation details
+function displayReservationPopup(reservations) {
+    let popupContent = '<h3>Reservas previas</h3><ul>';
+
+    reservations.forEach((reservation, index) => {
+        popupContent += `
+            <li data-index="${index}">
+                <strong>Mascota:</strong> ${reservation.petName}<br>
+                <strong>Servicios:</strong> ${reservation.selectedServices}<br>
+                <strong>Fecha y Hora:</strong> ${reservation.selectedDate}<br>
+                <button class="delete-reservation-btn btn btn-danger btn-sm mt-2">Eliminar</button>
+            </li>
+            <hr>
+        `;
+    });
+
+    popupContent += '</ul>';
+
+    // Create the modal
+    const modal = document.createElement('div');
+    modal.classList.add('modal');
+    modal.innerHTML = `
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            ${popupContent}
+        </div>
+    `;
+
+    // Append modal to the body
+    document.body.appendChild(modal);
+
+    // Add event listener to close the modal
+    modal.querySelector('.close-btn').addEventListener('click', function () {
+        modal.remove();
+    });
+
+    // Add event listeners to delete buttons
+    modal.querySelectorAll('.delete-reservation-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            const index = this.closest('li').dataset.index; // Get the index from the list item
+            deleteReservation(index, modal);
+        });
+    });
+
+    // Display the modal
+    modal.style.display = 'Flex';
+}
+
+// Function to delete a reservation
+function deleteReservation(index, modal) {
+    // Fetch reservations from localStorage
+    const reservations = JSON.parse(localStorage.getItem('reservations')) || [];
+    
+    // Remove the selected reservation
+    reservations.splice(index, 1);
+
+    // Update localStorage
+    localStorage.setItem('reservations', JSON.stringify(reservations));
+
+    // Refresh the modal content or close it if no reservations remain
+    if (reservations.length > 0) {
+        modal.remove(); // Remove the current modal
+        displayReservationPopup(reservations); // Reload with updated reservations
+    } else {
+        modal.remove(); // Close the modal
+        showPreviousReservationsMessage(); // Update the "Previous Reservations" message visibility
+    }
+}
+
+
+
+// Check for previous reservations on page load and show the message if needed
+window.addEventListener('load', function() {
+    showPreviousReservationsMessage();
 });
 
 // Ocultar todas las vistas
@@ -77,6 +255,7 @@ function navigateTo(view) {
     window.location.hash = view === 'inicio' ? '' : view;
 }
 
+//Funcion para mostrar todas las reviews del JSON
 function displayReviews() {
     fetch('static/reviews.json')
         .then(response => response.json())

@@ -101,56 +101,91 @@
                 </div>
             </div>
 
-             <!-- Vista Turnos  -->
-             <div id="turnos-view" class="view-container" style="display: none;">
-                <h2 class="mb-4">Agenda Tu Turno!</h2>
-                <div class="row ">
-                    <div class="col-md-6">
-                        <div class="calendar-container">
-                            <form id="booking-form">
-                                <div class="form-group">
-                                    <label for="pet-name">Nombre de tu mascota</label>
-                                    <input type="text" class="form-control" id="pet-name" required>
+            <!-- Vista turnos-->
+            <div id="turnos-view" class="view-container" style="display: none;">
+            <h2 class="mb-4">Agenda Tu Turno!</h2>
+            <div class="row d-flex align-items-stretch">
+                <div class="col-md-6 d-flex">
+                    <div class="calendar-container flex-fill">
+                        <form id="booking-form">
+                            <div class="form-group">
+                                <label for="pet-name">Nombre de tu mascota</label>
+                                <input type="text" class="form-control" id="pet-name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Tipo de servicio</label>
+                                <div class="service-cards row">
+                                    <div class="col-md-4">
+                                        <div class="service-card" data-service="Paseo">
+                                            <i class="fas fa-dog"></i>
+                                            <h5 class="card-title">Paseo</h5>
+                                            <i class="fas fa-check"></i>
+                                            <p class="card-text">Paseo individual para tu mascota</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="service-card" data-service="Cuidado en Casa">
+                                            <i class="fas fa-home"></i>
+                                            <h5 class="card-title">Cuidado en Casa</h5>
+                                            <i class="fas fa-check"></i>
+                                            <p class="card-text">Cuidado personalizado en tu hogar</p>  
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="service-card" data-service="Entrenamiento">
+                                            <i class="fas fa-dumbbell"></i>
+                                            <h5 class="card-title">Entrenamiento</h5>
+                                            <i class="fas fa-check"></i>
+                                            <p class="card-text">Sesiones de entrenamiento profesional</p>
+                                            
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="service-type">Tipo de servicio</label>
-                                    <select class="form-control" id="service-type" required>
-                                        <option value="walk">Paseo</option>
-                                        <option value="sitting">Cuidado en casa</option>
-                                        <option value="training">Entrenamiento</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="date">Fecha y hora</label>
-                                    <input type="text" class="form-control" id="date" required>
-                                </div>
-                                <button type="submit" class="btn nav-btn">Reservar Turno</button>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="booking-info">
-                            <h4>Horarios Disponibles</h4>
-                            <p>Nuestros servicios están disponibles:</p>
-                            <ul>
-                                <li>Lunes a Viernes: 8:00 - 20:00</li>
-                                <li>Sábados: 9:00 - 18:00</li>
-                                <li>Domingos: 10:00 - 16:00</li>
-                            </ul>
-                        </div>
+                                <input type="hidden" id="service-type" name="service-type" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="date">Fecha y hora</label>
+                                <input type="text" class="form-control" id="date" required>
+                                <small class="form-text text-muted">Puedes reservar hasta 2 meses por adelantado.</small>
+                            </div>
+                            
+                            <div>
+                                <button type="submit" class="nav-btn">Reservar Turno</button>
+                                <span id="previous-reservations" style="display:none; cursor:pointer; color:blue;">Tienes reservas previas</span>
+                            </div>
+                                
+
+                        </form>
+                        <div id="confirmation-message" class="mt-3"></div>
                     </div>
                 </div>
-                <!-- Google Map  -->
-                <div class="col-md-6">
-                    <h4>Área de Cobertura</h4>
-                    <div class="map-container" style="width: 100%; height: 300px; border-radius: var(--border-radius); overflow: hidden; box-shadow: var(--shadow-sm);">
-                        <iframe
-                            src="https://www.google.com/maps/d/u/0/embed?mid=1xVrwGENpUjkN32J1FBveO9VEvGMhSIE&ehbc=2E312F&noprof=1"
-                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
-                        </iframe>
-                     </div>
+                <div class="col-md-6 d-flex">
+                    <div class="booking-info flex-fill">
+                        <h4>Horarios Disponibles</h4>
+                        <p>Nuestros servicios están disponibles:</p>
+                        <ul>
+                            <li>Lunes a Viernes: 8:00 - 20:00</li>
+                            <li>Sábados: 9:00 - 18:00</li>
+                            <li>Domingos: 10:00 - 16:00</li>
+                        </ul>
+                        <h4>Area de Cobertura</h4>
+                        <div class="map-container">
+                            <iframe 
+                                src="https://www.google.com/maps/d/u/0/embed?mid=1xVrwGENpUjkN32J1FBveO9VEvGMhSIE&ehbc=2E312F&noprof=1"
+                                width="100%" height="50%" style="border:0;" allowfullscreen="" loading="lazy">
+                                allowfullscreen 
+                                loading="lazy">
+                            </iframe>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
+
+            
+            
 
             <!-- Vista Contactanos  -->
             <div id="contacto-view" class="view-container" style="display: none;">

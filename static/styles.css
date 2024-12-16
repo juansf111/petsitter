@@ -229,6 +229,13 @@ li::before {
 
 /* Media Query para diseño responsivo en moviles */
 @media (max-width: 768px) {
+  .service-cards {
+      flex-direction: column;
+  }
+
+  .service-card {
+      margin-bottom: 1rem;
+  }
   .navbar {
     padding: 0.5rem;
   }
@@ -301,4 +308,114 @@ li::before {
   color: var(--highlight-color);
   margin: 0 0.5rem;
   font-size: 0.8em; /* Adjust size as needed */
+}
+
+/* Estilos para las tarjetas de servicio */
+.service-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Space out content evenly */
+  align-items: center; /* Center content horizontally */
+  cursor: pointer;
+  padding: 15px;
+  border: 3px solid var(--terciary-color);
+  transition: background-color 0.3s ease;
+  margin-bottom: 20px;
+  height: 230px; /* Adjust this height as needed */
+  text-align: center; /* Ensure text is centered */
+  position: relative;
+}
+
+.service-card .fa-dumbbell {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.service-card .card-title {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  line-height: 1.3;
+}
+
+.service-card .fa-check {
+  font-size: 2rem;
+  color: var(--highlight-color);
+  margin-top: 10px; /* Adjust the space between title and checkmark */
+}
+
+.service-card .card-text {
+  font-size: 0.9rem;
+  margin-top: 10px;
+  line-height: 1.4;
+  margin-bottom: 0;
+}
+
+/* Style for selected cards */
+.service-card.selected {
+  background-color: var(--secondary-color); /* Light green background for selected cards */
+  border-color: var(--highlight-color); /* Green border for selected card */
+}
+
+/* Hide the checkmark by default */
+.service-card .fa-check {
+  display: none;
+}
+
+/* Display the checkmark when selected */
+.service-card.selected .fa-check {
+  display: block; /* Show checkmark only when selected */
+}
+
+.custom-alert {
+  background-color: #C7A9C1; /* Custom background color */
+  color: white; /* Text color */
+  font-size: 16px; /* Font size */
+  border-radius: 10px; /* Rounded corners */
+  padding: 20px; /* Add some padding */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add some shadow */
+}
+
+.custom-alert strong {
+  font-size: 18px; /* Make the strong text larger */
+}
+
+
+/* Modal overlay */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* Transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal content */
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  width: 90%;
+  max-width: 500px; /* Limit size */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+/* Close button */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #888;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  color: #333;
 }
